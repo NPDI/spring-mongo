@@ -6,6 +6,7 @@
 package com.npdi.demo.springmongo.services;
 
 import com.npdi.demo.springmongo.domain.User;
+import com.npdi.demo.springmongo.dto.UserDTO;
 import com.npdi.demo.springmongo.repository.UserRepository;
 import com.npdi.demo.springmongo.services.exception.ObjectNotFoundException;
 import java.util.List;
@@ -29,5 +30,13 @@ public class UserService {
             throw new ObjectNotFoundException("Objeto não encontrado");
         }
         return user.get();
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
