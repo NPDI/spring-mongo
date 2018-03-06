@@ -5,6 +5,7 @@
  */
 package com.npdi.demo.springmongo.domain;
 
+import com.npdi.demo.springmongo.dto.AuthorDTO;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -24,12 +25,12 @@ public class Post implements Serializable {
     private String title;
     private String body;
 
-    private User author;
+    private AuthorDTO author;
 
     public Post() {
     }
 
-    public Post(String id, Date date, String title, String body, User author) {
+    public Post(String id, Date date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
