@@ -5,6 +5,7 @@
  */
 package com.npdi.demo.springmongo.resources;
 
+import com.npdi.demo.springmongo.domain.Post;
 import java.net.URI;
 import com.npdi.demo.springmongo.domain.User;
 import com.npdi.demo.springmongo.dto.UserDTO;
@@ -72,5 +73,13 @@ public class UserResource {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = service.findById(id);
+
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
