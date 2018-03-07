@@ -8,6 +8,7 @@ package com.npdi.demo.springmongo.config;
 import com.npdi.demo.springmongo.domain.Post;
 import com.npdi.demo.springmongo.domain.User;
 import com.npdi.demo.springmongo.dto.AuthorDTO;
+import com.npdi.demo.springmongo.dto.CommentDTO;
 import com.npdi.demo.springmongo.repository.PostRepository;
 import com.npdi.demo.springmongo.repository.UserRepository;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, sdf.parse("20/02/2018"), "Partiu Viagem", "Vou viajar pra Dublin! Abraços...", new AuthorDTO(diego));
         Post post2 = new Post(null, sdf.parse("06/03/2018"), "Viagem Foi Otíma!", "Muito legal, obrigado pelo apoio!", new AuthorDTO(diego));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(cris));
+        CommentDTO c2 = new CommentDTO("Aproveite", sdf.parse("22/03/2018"), new AuthorDTO(jp));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new AuthorDTO(jp));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
         postRepo.saveAll(Arrays.asList(post1, post2));
 
         diego.getPosts().addAll(Arrays.asList(post1, post2));

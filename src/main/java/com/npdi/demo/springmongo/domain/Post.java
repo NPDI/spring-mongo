@@ -6,8 +6,11 @@
 package com.npdi.demo.springmongo.domain;
 
 import com.npdi.demo.springmongo.dto.AuthorDTO;
+import com.npdi.demo.springmongo.dto.CommentDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +28,7 @@ public class Post implements Serializable {
     private String body;
 
     private AuthorDTO author;
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post() {
     }

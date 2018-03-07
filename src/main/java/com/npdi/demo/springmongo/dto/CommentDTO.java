@@ -5,24 +5,25 @@
  */
 package com.npdi.demo.springmongo.dto;
 
-import com.npdi.demo.springmongo.domain.User;
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 @Data
-public class AuthorDTO implements Serializable {
+public class CommentDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
-    private String name;
+    private String text;
+    private Date date;
+    private AuthorDTO author;
 
-    public AuthorDTO() {
+    public CommentDTO(String text, Date date, AuthorDTO author) {
+        this.text = text;
+        this.date = date;
+        this.author = author;
     }
 
-    public AuthorDTO(User obj) {
-        id = obj.getId();
-        name = obj.getName();
+    public CommentDTO() {
     }
-
 }
