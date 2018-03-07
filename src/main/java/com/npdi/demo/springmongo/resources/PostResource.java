@@ -8,6 +8,7 @@ package com.npdi.demo.springmongo.resources;
 import com.npdi.demo.springmongo.domain.Post;
 import com.npdi.demo.springmongo.resources.util.URL;
 import com.npdi.demo.springmongo.services.PostService;
+import io.swagger.annotations.ApiOperation;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,14 @@ public class PostResource {
     @Autowired
     private PostService service;
 
+    @ApiOperation(value="Busca um post por id")
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable String id) {
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
+    @ApiOperation(value="Busca posts pelo titulo")
     @GetMapping("/titlesearch")
     public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
         text = URL.decodeParam(text);
@@ -38,6 +41,7 @@ public class PostResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @ApiOperation(value="Busca posts por um texto e em um range de datas")
     @GetMapping("/fullsearch")
     public ResponseEntity<List<Post>> fullSearch(
             @RequestParam(value = "text", defaultValue = "") String text,

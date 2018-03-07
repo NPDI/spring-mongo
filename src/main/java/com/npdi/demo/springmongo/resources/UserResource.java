@@ -10,6 +10,7 @@ import java.net.URI;
 import com.npdi.demo.springmongo.domain.User;
 import com.npdi.demo.springmongo.dto.UserDTO;
 import com.npdi.demo.springmongo.services.UserService;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class UserResource {
     private UserService service;
 
     @GetMapping
+    @ApiOperation(value = "Busca todos os usuários")
     public ResponseEntity<List<UserDTO>> findAll() {
 
         List<User> list = service.findAll();
@@ -42,6 +44,7 @@ public class UserResource {
         return ResponseEntity.ok().body(listDto);
     }
 
+    @ApiOperation(value = "Busca um usuário por id")
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 
@@ -51,6 +54,7 @@ public class UserResource {
     }
 
     @PostMapping
+    @ApiOperation(value = "Insere novo usuario")
     public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
 
         User obj = service.fromDTO(objDto);
@@ -62,12 +66,14 @@ public class UserResource {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Deleta um usuario pelo id")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza um usuário")
     public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
         User obj = service.fromDTO(objDto);
         obj.setId(id);
@@ -76,6 +82,7 @@ public class UserResource {
     }
 
     @GetMapping("/{id}/posts")
+    @ApiOperation(value = "Busca todos os posts de um usuário")
     public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
 
         User obj = service.findById(id);
